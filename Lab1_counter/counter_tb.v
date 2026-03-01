@@ -40,7 +40,7 @@ module counter_tb;
         
         // 此時 State 應為 7。
         // 根據圖：State 7 若 C=1 -> State 0
-        #10 C = 1; // 觸發跳轉到 0
+        #5 C = 1; // 觸發跳轉到 0
 
         // State 0 若 C=0 -> State 1
         #10 C = 0; 
