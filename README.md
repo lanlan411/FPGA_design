@@ -1,4 +1,35 @@
-# FPGA_design
+# FPGA Lab 自動化編譯與調適工具使用說明
+本專案包含兩個 Shell Script (`run_labs.sh` 與 `run_verdi.sh`)，用於簡化 Cadence xmverilog 編譯與 Verdi 波形查看的流程。
+系統採用**目錄隔離**設計，所有模擬產生的暫存檔（如 Log、FSDB）都會自動被整理在各個 Lab 目錄下的 `sim/` 資料夾中。
+## run_labs.sh (編譯與模擬腳本)
+### 功能說明
+此腳本會根據你輸入的Testbench檔名，自動搜尋專案內的對應目錄，建立 `sim/` 資料夾，並執行 `xmverilog` 進行硬體模擬。
+### 使用方法
+> ./run_labs.sh [Testbench檔名.v]
+## run_verdi.sh (開啟波形腳本)
+### 功能說明
+模擬完成後，此腳本可一鍵開啟 Verdi 圖形介面。它會自動定位到正確的 Lab 目錄，並同步載入 RTL 原始碼、Testbench 以及 `sim/` 內的 `.fsdb` 波形檔。
+### 使用方法
+> ./run_verdi.sh [Testbench檔名.v]
+## 快速上手流程
+1. **賦予腳本執行權限 (僅需執行一次)**：
+> chmod +x run_labs.sh run_verdi.sh
+2. **第一步：執行模擬**
+> ./run_labs.sh counter_tb.v
+3. **第二步：開啟波形除錯**
+> ./run_verdi.sh counter_tb.v
+## 目錄結構示意
+執行過模擬後的資料夾結構會長這樣：
+```
+├── run_labs.sh
+├── run_verdi.sh
+└── Lab1_counter/
+    ├── counter.v          
+    ├── counter_tb.v       
+    └── sim/               
+        ├── counter.fsdb   
+        └── xmverilog.log  
+```
 ## Lab1 counter
 ### Objectives
 The goal of this lab is to design and implement a specific counter based on the provided state diagram using Verilog HDL.
